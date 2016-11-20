@@ -1,17 +1,283 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
     <meta charset="UTF-8">
-    <title>D-Ooook</title>
+    <title>Salary Prediction</title>
 </head>
 <body>
-    {% for post in posts %}
-        <div>
-            <p>published: {{ post.published_date }}</p>
-                <h1><a href="">{{ post.title }}</a></h1>
-            <p>{{ post.text|linebreaksbr }}</p>
-        </div>
-        <p>--------------------------------------------</p>
-    {% endfor %}
+    <div class="page-header">
+        <h1>Salary Prediction</h1>
+    </div>
+
+    <div class="content container">
+        <form method="POST" class="post-form">{% csrf_token %}
+            <table border="0">
+                <tr>
+                    <td align="right" width="150px">
+                        <h5 style="font-weight: bold;">Industry Type : &nbsp;</h5>
+                    </td>
+                    <td>
+                        {{ form.industry }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <h5 style="font-weight: bold;">Job Function : &nbsp;</h5>
+                    </td>
+                    <td>
+                        {{ form.function }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <h5 style="font-weight: bold;">Location : &nbsp;</h5>
+                    </td>
+                    <td>
+                        {{ form.location }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <h5 style="font-weight: bold;">Career Level : &nbsp;</h5>
+                    </td>
+                    <td>
+                        {{ form.career_level }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <h5 style="font-weight: bold;">Qualification : &nbsp;</h5>
+                    </td>
+                    <td>
+                        {{ form.qualification }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <h5 style="font-weight: bold;">Experience : &nbsp;</h5>
+                    </td>
+                    <td>
+                        {{ form.experience }} Year(s)
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <h5 style="font-weight: bold;">Urgent : &nbsp;</h5>
+                    </td>
+                    <td>
+                        {{ form.urgent }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <h5 style="font-weight: bold;">Salary Negotiable : &nbsp;</h5>
+                    </td>
+                    <td>
+                        {{ form.salary_negotiable }}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <h5 style="font-weight: bold;">Employment Type : &nbsp;</h5>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td align="right" valign="middle">
+                                    {{ form.full_time }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Full Time
+                                </td>
+                                <td width="50px" align="right" valign="middle">
+                                    {{ form.part_time }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Part Time
+                                </td>
+                                <td width="50px" align="right" valign="middle">
+                                    {{ form.permanent }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Permanent
+                                </td>
+                                <td width="50px" align="right" valign="middle">
+                                    {{ form.temporary }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Temporary
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="middle">
+                                    {{ form.contract }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Contract
+                                </td>
+                                <td width="50px" align="right" valign="middle">
+                                    {{ form.internship }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Internship
+                                </td>
+                                <td width="50px" align="right" valign="middle">
+                                    {{ form.freelance }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Freelance
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="right">
+                        <h5 style="font-weight: bold;">Benefit : &nbsp;</h5>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td align="right" valign="bottom" height="30px">
+                                    {{ form.dental }}
+                                </td>
+                                <td valign="bottom" align="left">
+                                    &nbsp;Dental insurance
+                                </td>
+                                <td width="50px" align="right" valign="bottom">
+                                    {{ form.education }}
+                                </td>
+                                <td valign="bottom" align="left">
+                                    &nbsp;Education allowance
+                                </td>
+                                <td width="50px" align="right" valign="bottom">
+                                    {{ form.five_day }}
+                                </td>
+                                <td valign="bottom" align="left">
+                                    &nbsp;Five-day work week
+                                </td>
+                                <td width="50px" align="right" valign="bottom">
+                                    {{ form.five_day }}
+                                </td>
+                                <td valign="bottom" align="left">
+                                    &nbsp;Flexible working hours
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="middle">
+                                    {{ form.shuttle }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Free shuttle bus
+                                </td>
+                                <td align="right" valign="middle">
+                                    {{ form.gratuity }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Gratuity
+                                </td>
+                                <td align="right" valign="middle">
+                                    {{ form.housing }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Housing allowance
+                                </td>
+                                <td align="right" valign="middle">
+                                    {{ form.life }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Life insurance
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="middle">
+                                    {{ form.medical }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Medical insurance
+                                </td>
+                                <td align="right" valign="middle">
+                                    {{ form.overtime }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Overtime pay
+                                </td>
+                                <td align="right" valign="middle">
+                                    {{ form.bonus }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Performance bonus
+                                </td>
+                                <td align="right" valign="middle">
+                                    {{ form.transport }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Transportation allowance
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="middle">
+                                    {{ form.travel }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Travel allowance
+                                </td>
+                                <td align="right" valign="middle">
+                                    {{ form.home }}
+                                </td>
+                                <td align="left">
+                                    &nbsp;Work from home
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td height="25px" valign="middle" style="padding-top: 10px;">
+                        <button type="submit" class="save btn btn-default">Predict</button>
+                </tr>
+            </table>
+        </form>
+        <table>
+            <tr>
+                <td align="right" width="100px"></td>
+                <td>
+                    <table>
+                        <tr>
+                            <td align="center" width="200px" height="10px">
+                                <font style="font-weight: bold; font-size: 18px; color: #d13319;">MIN</font>
+                            </td>
+                            <td align="center" width="200px" valign="bottom">
+                                <h5 style="font-weight: bold; font-size: 18px; color: #4b8f04;">MAX</h5>
+                            </td>
+                            <td align="center" width="200px" valign="bottom">
+                                <h5 style="font-weight: bold; font-size: 18px;">MEAN</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <h5 style="font-weight: bold; font-size: 25px;">{{ min_salary }}฿</h5>
+                            </td>
+                            <td align="center">
+                                <h5 style="font-weight: bold; font-size: 25px;">{{ max_salary }}฿</h5>
+                            </td>
+                            <td align="center">
+                                <h5 style="font-weight: bold; font-size: 25px;">{{ avg_salary }}฿</h5>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
 </body>
 </html>
